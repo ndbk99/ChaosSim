@@ -3,7 +3,7 @@ import numpy as np
 
 # function used to apply to itself
 def func(x, r):
-    return r * x * (1 - x)
+    return r * x * (1-x)
 
 """
 algorithm that runs func(x,r) over and over on itself
@@ -15,7 +15,7 @@ def recursion(r, x, info=False):
     y_values = []
 
     # iterate function on itself
-    for i in range(10000):  # range=100,000
+    for i in range(100):  # range=100,000
         x = func(x, r)  # set new x value to current y value
         y_values.append(x)
 
@@ -36,6 +36,7 @@ search for equilibria in function values
 parameters: array of function values, boolean of whether to print info (optional, default False)
 return: array of equilibria in function values
 """
+
 def find_eqs(arr, info=False):
 
     # dict holding [possible equilibrium value : number of occurrences]
@@ -63,11 +64,11 @@ def find_eqs(arr, info=False):
             eqs.append(x)
 
     return eqs
-
+    
 
 # generate graph of equilibrium values vs values of r
 def plot(pop):
-    r_arr = [round(n * 0.0001,5) for n in range(10000,40001,1)]
+    r_arr = [n * 0.01 for n in range(-1000,1000,1)]
 
     x = r_arr
     y = []
@@ -79,6 +80,7 @@ def plot(pop):
 
     for xe, ye in zip(x, y):
         plt.scatter([xe] * len(ye), ye, s=0.5)
+        print(xe)
     plt.show()
     print("end")
 
